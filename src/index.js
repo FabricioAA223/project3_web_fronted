@@ -7,10 +7,12 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Dashboard } from './pages/dashboard/Dashboard';
-import { Login } from './pages/login/Login';
-import { SignUp } from './pages/sign up/SignUp';
+import Login  from './pages/login/Login';
 import { UserProfile } from './pages/user profile/UserProfile';
 import { NotFound } from './pages/404 not found/NotFound';
+import SignUp from './pages/sign up/SignUp'; 
+
+
 
 const router = createBrowserRouter([
   {
