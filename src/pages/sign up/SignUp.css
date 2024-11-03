@@ -1,73 +1,56 @@
-/* Contenedor de registro */
-.register-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f5f7fa;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Formulario */
-  .register-form {
-    width: 500px;
-    padding: 40px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  .register-form h2 {
-    margin-bottom: 20px;
-    color: #333;
-    font-weight: bold;
-  }
-  
-  .register-form input[type="text"],
-  .register-form input[type="password"],
-  .register-form input[type="date"],
-  .register-form input[type="email"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  /* Dropdown para género */
-  .register-form select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-    margin-top: 10px;
-  }
-  
-  /* Botón de registro */
-  .register-form button {
-    width: 100%;
-    padding: 12px;
-    background-color: #4CAF50;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 15px;
-  }
-  
-  .register-form button:hover {
-    background-color: #45a049;
-  }
-  
-  /* Estilo de error */
-  .error-message {
-    color: #ff3333;
-    margin: 10px 0;
-    font-size: 14px;
-  }
-  
+/* SignUp.css */
+.signup-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.signup-container h2 {
+  text-align: center;
+}
+
+.signup-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-container div {
+  margin-bottom: 15px;
+}
+
+.signup-container label {
+  margin-bottom: 5px;
+}
+
+.signup-container input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.signup-container button {
+  padding: 10px;
+  background-color: #4b6cb7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.signup-container button:hover {
+  background-color: #3a599b;
+}
+
+.error {
+  color: red;
+  text-align: center;
+}
+
+.success {
+  color: green;
+  text-align: center;
+}

@@ -1,23 +1,20 @@
-import React, { useState } from 'react';
-import Login from './pages/login/Login'; // Asegúrate de que la ruta sea correcta
-import Register from './pages/sign up/SignUp'; // Asegúrate de que esta también sea correcta
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Dashboard from './pages/dashboard/Dashboard';
+import LoginPage from './pages/login/Login';
+import SignUp from './pages/sign up/SignUp';
 
 const App = () => {
-  const [isLogin, setIsLogin] = useState(true);
-
   return (
-    <div>
-      {isLogin ? (
-        <Login />
-      ) : (
-        <Register />
-      )}
-      <button onClick={() => setIsLogin(!isLogin)} className="btn btn-link">
-        {isLogin ? '¿No tienes cuenta? Regístrate' : '¿Ya tienes cuenta? Inicia sesión'}
-      </button>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        {/* Puedes agregar más rutas según sea necesario */}
+      </Routes>
+    </Router>
   );
 };
 
 export default App;
-
