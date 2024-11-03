@@ -6,13 +6,12 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import { Dashboard } from './pages/dashboard/Dashboard';
-import Login  from './pages/login/Login';
+import Login from './pages/login/Login';
 import { UserProfile } from './pages/user profile/UserProfile';
 import { NotFound } from './pages/404 not found/NotFound';
 import SignUp from './pages/sign up/SignUp'; 
-
-
+import Dashboard from './pages/dashboard/Dashboard';
+import { AuthProvider } from './context/AuthContext'; 
 
 const router = createBrowserRouter([
   {
@@ -36,6 +35,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider> {/* Envuelve RouterProvider con AuthProvider */}
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );
