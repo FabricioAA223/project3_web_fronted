@@ -1,0 +1,98 @@
+.import-data-button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.import-data-button:hover {
+    background-color: #357abd;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Añadido un z-index alto */
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    /* Añadido */
+    z-index: 1001;
+    /* Añadido un z-index mayor que el overlay */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group select,
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.success-message {
+    color: green;
+    margin-top: 10px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-group button[type="submit"] {
+    background-color: #4a90e2;
+    color: white;
+}
+
+.button-group button[type="submit"]:hover {
+    background-color: #357abd;
+}
+
+.button-group button[type="button"] {
+    background-color: #ccc;
+    color: black;
+}
+
+.button-group button[type="button"]:hover {
+    background-color: #bbb;
+}

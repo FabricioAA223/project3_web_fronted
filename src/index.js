@@ -6,7 +6,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import { Dashboard } from './pages/dashboard/Dashboard';
+import Dashboard  from './pages/dashboard/Dashboard';
 import { Login } from './pages/login/Login';
 import { SignUp } from './pages/sign up/SignUp';
 import { UserProfile } from './pages/user profile/UserProfile';
