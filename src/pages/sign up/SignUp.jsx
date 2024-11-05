@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import './SignUp.css';
+import { useNavigate } from 'react-router-dom'; // Importa useNavigate
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     username: '',
@@ -60,6 +62,10 @@ const SignUp = () => {
       setError(err.message);
     }
   };
+    // Función para regresar al index
+    const handleBackToIndex = () => {
+        navigate('/'); // Redirecciona al index
+      };
 
   return (
     <div className="signup-container">
@@ -139,6 +145,8 @@ const SignUp = () => {
         </div>
         <button type="submit">Registrarse</button>
       </form>
+        <p>¿Ya tienes una cuenta? <button onClick={() => navigate('/login')}>Inicia sesión</button></p>
+      <button onClick={handleBackToIndex} className="back-button">Regresar al Inicio</button>
     </div>
   );
 };

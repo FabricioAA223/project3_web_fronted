@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css'; // Asegúrate de tener un archivo CSS para estilizar el componente
+import { useNavigate } from 'react-router-dom'; // Importa useNavigate
 
 const Login = ({ login, onChangePage }) => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -59,7 +61,7 @@ const Login = ({ login, onChangePage }) => {
       {loading && <p className="loading-message">Cargando...</p>} {/* Mensaje de carga */}
       {error && <p className="error-message">{error}</p>} {/* Mensaje de error */}
       <div className="links">
-        <button onClick={() => onChangePage('SignUp')}>¿No tienes cuenta? Regístrate</button>
+        <p>¿Necesitas Registrarte? <button onClick={() => navigate('/signup')}>Registrate</button></p>
       </div>
     </div>
   );

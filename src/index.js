@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -10,13 +9,13 @@ import Login from './pages/login/Login';
 import { UserProfile } from './pages/user profile/UserProfile';
 import { NotFound } from './pages/404 not found/NotFound';
 import SignUp from './pages/sign up/SignUp'; 
-import Dashboard from './pages/dashboard/Dashboard';
 import { AuthProvider } from './context/AuthContext'; 
+import WelcomePage from './pages/welcomePage/Welcome';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Dashboard/>,
+    element: <WelcomePage/>,
     errorElement: <NotFound />
   },
   {
