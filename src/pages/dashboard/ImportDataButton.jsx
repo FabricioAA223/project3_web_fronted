@@ -48,7 +48,7 @@ export default function ImportDataButton({ onDataImported }) {
 
     try {
       const response = await axios.post(
-        `http://127.0.0.1:8000/import-data?user_id=15&data_type=${selectedDataType}`,
+        `http://127.0.0.1:8000/import-data?user_id=1&data_type=${selectedDataType}`,
         formData,
         {
           headers: {

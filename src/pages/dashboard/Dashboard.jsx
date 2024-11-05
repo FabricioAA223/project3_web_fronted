@@ -10,17 +10,20 @@ import ExerciseList from './components/ExerciseList';
 import BodyFatPercentageCard from './components/BodyFatPercentageCard';
 import ImportDataButton from './ImportDataButton';
 import './Dashboard.css';
+import { HistoricalView } from './components/HistoricalView';
+
 
 export default function Dashboard() {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [newData, setNewData] = useState(false);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('general');
 
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/dashboard/view?user_id=15');
+        const response = await axios.get('http://127.0.0.1:8000/dashboard/view?user_id=1');
         setDashboardData(response.data.data);
         setLoading(false);
       } catch (err) {
@@ -30,7 +33,7 @@ export default function Dashboard() {
     };
 
     fetchDashboardData();
-  }, []);
+  }, [newData]);
 
   if (loading) return <div className="loading">Cargando...</div>;
   if (error) return <div className="error">{error}</div>;
@@ -39,7 +42,7 @@ export default function Dashboard() {
   return (
     <div className="dashboard-container">
       <h1 className="dashboard-title">Dashboard de Salud</h1>
-      <ImportDataButton />
+      <ImportDataButton onDataImported={()=>setNewData(!newData)}/>
       <div className="dashboard-tabs">
         <button 
           className={`tab-button ${activeTab === 'general' ? 'active' : ''}`}
@@ -70,8 +73,7 @@ export default function Dashboard() {
         )}
         {activeTab === 'historical' && (
           <div className="historical-view">
-            <h2>Vista Histórica</h2>
-            <p>Aquí se mostrará la información histórica (no implementado en este ejemplo).</p>
+            <HistoricalView newData={newData}/>
           </div>
         )}
       </div>

@@ -1,3 +1,38 @@
+/* Estilos para los select del historico */
+.selects-group{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+.div-select{
+    display: flex;
+    flex-direction: column;
+}
+.div-select select{
+    padding: 10px;
+
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: #333;
+    cursor: pointer;
+
+    &:focus, &:hover{
+        border-color: var(--primary-color);
+        outline: none;
+        box-shadow: 0 0 5px rgba(85, 255, 0, 0.5);
+    }
+}
+  
+.div-select select option {
+    padding: 8px;
+    background-color: #fff;
+}
+
+
+/* --------------------------------------- */
+
 .dashboard-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -257,6 +292,7 @@ body {
 
 .dashboard-tabs {
     display: flex;
+    gap: 20px;
     justify-content: center;
     margin-bottom: 30px;
     background-color: var(--card-background);
@@ -359,6 +395,29 @@ body {
     height: 200px;
 }
 
+.msg-alert{
+    text-align: center;
+    margin-top: 40px;
+}
+
+.total-water-container{
+    padding: 20px;
+    text-align: center;
+    background-color: #e0f7fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width:300px;
+
+}
+.total-water-card {
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 15px;
+}
+
 /* Animaciones */
 @keyframes pulse {
     0% {
@@ -383,8 +442,13 @@ body {
     .dashboard-tabs {
         flex-direction: column;
         border-radius: 15px;
+        gap: 0;
     }
 
+    .selects-group{
+        flex-direction: column;
+        gap: 20px;
+    }
     .tab-button {
         width: 100%;
         justify-content: center;
