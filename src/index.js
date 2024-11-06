@@ -11,6 +11,7 @@ import { NotFound } from './pages/404 not found/NotFound';
 import SignUp from './pages/sign up/SignUp'; 
 import { AuthProvider } from './context/AuthContext'; 
 import WelcomePage from './pages/welcomePage/Welcome';
+import Dashboard  from './pages/dashboard/Dashboard';
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/my_profile",
     element: <UserProfile />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
   },
 ]);
 
