@@ -1,52 +1,43 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './Login.css';
 import { useNavigate } from 'react-router-dom';
 
-const Login = ({ login }) => {
-  const navigate = useNavigate();
+const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
+    setError('');
 
     try {
-      const response = await axios.post("http://localhost:8000/login", {
-        username,
-        password,
-      });
+      // Asegúrate de enviar los datos en formato JSON
+      const response = await axios.post(
+        'http://localhost:8000/login',
+        { username, password },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
-      if (response.data && response.data.access_token) {
-        // Almacena el token y user_id en el almacenamiento local
-        localStorage.setItem("token", response.data.access_token);
-        localStorage.setItem("user_id", response.data.user_id); // Asumimos que el user_id viene con la respuesta
-
-        // Simula el inicio de sesión del usuario
-        login({ username, email: 'example2@mail.com', profileImage: '/path/to/profile-image.jpg' });
-
-        // Muestra el mensaje de éxito
-        setSuccessMessage("Login exitoso, redirigiendo...");
-
-        // Redirige al dashboard con el user_id
-        setTimeout(() => {
-          navigate(`/dashboard/view?user_id=${response.data.user_id}`);
-        }, 2000);
-      }
+      // Si el login es exitoso, redirigir al perfil del usuario
+      const userId = response.data.id;
+      navigate(`/profile/${userId}`);
     } catch (error) {
-      setError("No se logró iniciar sesión. Por favor verifica tu nombre de usuario y contraseña.");
-    } finally {
       setLoading(false);
+      // Si hay un error, mostrar un mensaje de error
+      if (error.response && error.response.status === 401) {
+        setError('Credenciales incorrectas');
+      } else {
+        setError('Error desconocido');
+      }
     }
-  };
-
-  const handleBackToIndex = () => {
-    navigate('/');
   };
 
   return (
@@ -67,17 +58,14 @@ const Login = ({ login }) => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit" disabled={loading}>Iniciar Sesión</button>
+        <button type="submit" disabled={loading}>
+          Iniciar Sesión
+        </button>
       </form>
       {loading && <p className="loading-message">Cargando...</p>}
       {error && <p className="error-message">{error}</p>}
-      {successMessage && <p className="success-message">{successMessage}</p>}
-      <div className="links">
-        <p>¿Necesitas Registrarte? <button onClick={() => navigate('/signup')}>Registrate</button></p>
-        <button onClick={handleBackToIndex} className="back-button">Regresar al Inicio</button>
-      </div>
     </div>
   );
 };
 
-export default Login;
+export default LoginForm;
