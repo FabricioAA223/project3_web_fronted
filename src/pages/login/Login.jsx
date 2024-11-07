@@ -88,7 +88,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-content">
-        <h1 className="app-title">FitTrack</h1>
+        <h1 className="app-title">FMO Track</h1>
         <form onSubmit={handleSubmit} className="login-form">
           <h2>Iniciar Sesión</h2>
           {errors.general && <p className="error-message general-error">{errors.general}</p>}

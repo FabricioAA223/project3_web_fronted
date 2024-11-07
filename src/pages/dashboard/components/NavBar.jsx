@@ -9,7 +9,7 @@ const NavBar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/dashboard" className="navbar-logo">
-          FitTrack
+          FMO Track
         </Link>
         <ul className="nav-menu">
           <li className="nav-item">
