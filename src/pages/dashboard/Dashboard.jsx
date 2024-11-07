@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import WeightHeightCard from './components/WeightHeightCard';
-import { Activity, Clock } from 'lucide-react'; // Importamos iconos
+import { Activity, Clock } from 'lucide-react';
 import BodyCompositionChart from './components/BodyCompositionChart';
 import BMICard from './components/BMICard';
 import WaterIntakeCard from './components/WaterIntakeCard';
@@ -11,7 +11,6 @@ import BodyFatPercentageCard from './components/BodyFatPercentageCard';
 import ImportDataButton from './ImportDataButton';
 import './Dashboard.css';
 import { HistoricalView } from './components/HistoricalView';
-
 
 export default function Dashboard() {
   const [dashboardData, setDashboardData] = useState(null);
@@ -23,7 +22,18 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/dashboard/view?user_id=1');
+        const token = localStorage.getItem('token');
+        if (!token) {
+          setError('No estás autenticado. Por favor, inicia sesión.');
+          setLoading(false);
+          return;
+        }
+
+        const response = await axios.get('http://127.0.0.1:8000/dashboard/view', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setDashboardData(response.data.data);
         setLoading(false);
       } catch (err) {
@@ -42,16 +52,16 @@ export default function Dashboard() {
   return (
     <div className="dashboard-container">
       <h1 className="dashboard-title">Dashboard de Salud</h1>
-      <ImportDataButton onDataImported={()=>setNewData(!newData)}/>
+      <ImportDataButton onDataImported={() => setNewData(!newData)} />
       <div className="dashboard-tabs">
-        <button 
+        <button
           className={`tab-button ${activeTab === 'general' ? 'active' : ''}`}
           onClick={() => setActiveTab('general')}
         >
           <Activity size={24} />
           <span>Vista General</span>
         </button>
-        <button 
+        <button
           className={`tab-button ${activeTab === 'historical' ? 'active' : ''}`}
           onClick={() => setActiveTab('historical')}
         >
@@ -73,7 +83,7 @@ export default function Dashboard() {
         )}
         {activeTab === 'historical' && (
           <div className="historical-view">
-            <HistoricalView newData={newData}/>
+            <HistoricalView newData={newData} />
           </div>
         )}
       </div>

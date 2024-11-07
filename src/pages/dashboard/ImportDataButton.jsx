@@ -47,12 +47,20 @@ export default function ImportDataButton({ onDataImported }) {
     formData.append('file', file);
 
     try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setError('No estás autenticado. Por favor, inicia sesión.');
+        setIsLoading(false);
+        return;
+      }
+
       const response = await axios.post(
-        `http://127.0.0.1:8000/import-data?user_id=1&data_type=${selectedDataType}`,
+        `http://127.0.0.1:8000/import-data?data_type=${selectedDataType}`,
         formData,
         {
           headers: {
-            'Content-Type': 'multipart/form-data'
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`
           }
         }
       );
@@ -66,7 +74,13 @@ export default function ImportDataButton({ onDataImported }) {
         setError('Error al importar los datos.');
       }
     } catch (error) {
-      setError('Error al importar los datos: ' + (error.response?.data?.detail || error.message));
+      if (error.response) {
+        setError('Error al importar los datos: ' + (error.response.data.detail || error.message));
+      } else if (error.request) {
+        setError('No se pudo conectar con el servidor. Por favor, asegúrate de que el backend está encendido.');
+      } else {
+        setError('Error inesperado: ' + error.message);
+      }
     } finally {
       setIsLoading(false);
     }

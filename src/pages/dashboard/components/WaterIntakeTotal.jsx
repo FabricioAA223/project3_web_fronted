@@ -4,7 +4,6 @@ const WaterIntakeTotal = ({ data }) => {
   // Calcular la cantidad total de vasos de agua
   const totalGlasses = data.reduce((acc, entry) => acc + entry["Vasos de agua"], 0);
   
-  // Convertir a litros
   const totalLiters = (totalGlasses * 0.25).toFixed(2); // 250 ml por vaso = 0.25 L
 
   return (

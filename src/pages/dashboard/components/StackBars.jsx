@@ -15,7 +15,7 @@ const groupDataByDate = (data) => {
     Object.keys(item).forEach((key) => {
       if (key !== "fecha") {
         groupedData[date][key] = (groupedData[date][key] || 0) + item[key];
-      }
+      } 
     });
   });
 
