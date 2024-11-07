@@ -13,16 +13,19 @@ import SignUp from './pages/sign up/SignUp';
 import UserProfile from './pages/user profile/UserProfile';
 import { NotFound } from './pages/404 not found/NotFound';
 import { AuthProvider } from './context/AuthContext';
+import WelcomePage from './pages/Welcome/Welcome';
 
 // Helper function to check if the user is logged in
 const isAuthenticated = () => {
-  return !!localStorage.getItem('token');
+  return !!localStorage.getItem('token'); // Verifica si hay un token en localStorage
 };
 
+// Componente para rutas protegidas
 const ProtectedRoute = ({ children }) => {
   return isAuthenticated() ? children : <Navigate to="/login" replace />;
 };
 
+// Configuración del router
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,16 +33,16 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       {
-        index: true,
-        element: <ProtectedRoute><Dashboard /></ProtectedRoute>,
+        index: true,  // Aquí se carga WelcomePage solo si el usuario no está autenticado
+        element: isAuthenticated() ? <Navigate to="/dashboard" replace /> : <WelcomePage />,
       },
       {
         path: "login",
-        element: isAuthenticated() ? <Navigate to="/" replace /> : <Login />,
+        element: isAuthenticated() ? <Navigate to="/dashboard" replace /> : <Login />,
       },
       {
         path: "signup",
-        element: <SignUp />,
+        element: isAuthenticated() ? <Navigate to="/dashboard" replace /> : <SignUp />,
       },
       {
         path: "my_profile",
