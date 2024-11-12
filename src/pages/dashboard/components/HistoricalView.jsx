@@ -36,13 +36,25 @@ export const HistoricalView = ({newData}) => {
     useEffect(() => {  
       const fetchDashboardData = async () => {
         try {
-          const response = await axios.get(`http://127.0.0.1:8000/dashboard/history?user_id=1&data_type=${selectedDataType}&period=${timePeriodSelected}`);
+          const token = localStorage.getItem('token');
+          if (!token) {
+            setError('No estás autenticado. Por favor, inicia sesión.');
+            return;
+          }
+          const response = await axios.get(`http://127.0.0.1:8000/dashboard/history?data_type=${selectedDataType}&period=${timePeriodSelected}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+          });
           setData(response.data.data);
         } catch (err) {
           setError('Error al cargar los datos del dashboard');
           console.log(err)
         }
-      };
+      }
+        
+
 
       if (selectedDataType && timePeriodSelected){
         fetchDashboardData()

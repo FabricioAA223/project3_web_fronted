@@ -8,7 +8,7 @@ const UserProfile = () => {
     const [userData, setUserData] = useState({
         email: '',
         username: '',
-        birthday: '',
+        birthdate: '',
         gender: '',
         password: '',
         confirmPassword: ''
@@ -18,7 +18,15 @@ const UserProfile = () => {
     const [successMessage, setSuccessMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
-
+    const date = new Date();
+    // Obtener el año, el mes y el día en formato YYYY-MM-DD usando métodos locales
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Mes en formato 2 dígitos
+    const day = String(date.getDate()).padStart(2, '0'); // Día en formato 2 dígitos
+    
+    // Crear la fecha en formato "YYYY-MM-DD"
+    const today = `${year}-${month}-${day}`;
+    
     useEffect(() => {
         fetchUserProfile();
     }, []);
@@ -35,6 +43,7 @@ const UserProfile = () => {
                 throw new Error('Failed to fetch profile');
             }
             const data = await response.json();
+            console.log(data)
             setUserData(prevState => ({
                 ...prevState,
                 ...data,
@@ -51,6 +60,7 @@ const UserProfile = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        console.log("Cambiando: ", name, value)
         setUserData(prevState => ({
             ...prevState,
             [name]: value
@@ -87,6 +97,7 @@ const UserProfile = () => {
         setIsLoading(true);
         try {
             const dataToUpdate = { ...userData };
+            console.log("Data nueva", dataToUpdate)
             delete dataToUpdate.confirmPassword;
             if (!dataToUpdate.password) delete dataToUpdate.password;
 
@@ -162,9 +173,10 @@ const UserProfile = () => {
                             <label htmlFor="birthday">Fecha de Nacimiento</label>
                             <input
                                 type="date"
-                                id="birthday"
-                                name="birthday"
-                                value={userData.birthday}
+                                id="birthdate"
+                                name="birthdate"
+                                max={today}
+                                value={userData.birthdate}
                                 onChange={handleChange}
                                 disabled={!isEditing}
                             />

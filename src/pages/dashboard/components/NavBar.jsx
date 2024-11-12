@@ -20,14 +20,7 @@ const NavBar = () => {
               Dashboard
             </Link>
           </li>
-          {/* <li className="nav-item">
-            <Link 
-              to="/import-data" 
-              className={`nav-link ${location.pathname === '/import-data' ? 'active' : ''}`}
-            >
-              Importar Datos
-            </Link>
-          </li> */}
+
           <li className="nav-item">
             <Link 
               to="/my_profile" 

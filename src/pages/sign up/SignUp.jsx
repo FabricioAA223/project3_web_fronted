@@ -16,7 +16,16 @@ const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const date = new Date();
+  // Obtener el año, el mes y el día en formato YYYY-MM-DD usando métodos locales
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Mes en formato 2 dígitos
+  const day = String(date.getDate()).padStart(2, '0'); // Día en formato 2 dígitos
+  
+  // Crear la fecha en formato "YYYY-MM-DD"
+  const today = `${year}-${month}-${day}`;
 
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -198,6 +207,7 @@ const SignUp = () => {
               id="birthdate"
               name="birthdate"
               value={formData.birthdate}
+              max={today}
               onChange={handleChange}
               required
               className={errors.birthdate ? 'error-input' : ''}
